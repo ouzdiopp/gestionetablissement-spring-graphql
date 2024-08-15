@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20240815121555"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "valeur",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "20",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "commentaire",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "name": "Note",
+  "relationships": [
+    {
+      "otherEntityName": "inscription",
+      "relationshipName": "inscription",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

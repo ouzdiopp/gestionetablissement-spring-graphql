@@ -20,6 +20,10 @@ spring:
   config:
     activate:
       on-profile: '!api-docs'
+  graphql:
+    graphiql:
+      enabled: true
+
 springdoc:
   api-docs:
     enabled: false

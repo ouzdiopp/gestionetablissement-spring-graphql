@@ -1,0 +1,108 @@
+# Get a specific etudiant
+query {
+  etudiant(id: 1) {
+    id
+    numeroEtudiant
+    dateNaissance
+    filiere
+    user {
+      id
+      login
+    }
+    departement {
+      id
+      nom
+    }
+  }
+}
+
+# Get a list of etudiants with pagination
+query {
+  etudiants(page: 0, size: 10) {
+    id
+    numeroEtudiant
+    filiere
+  }
+}
+
+# Get a specific professeur
+query {
+  professeur(id: 1) {
+    id
+    numeroEmploye
+    dateEmbauche
+    specialite
+    bureau
+    user {
+      id
+      login
+    }
+    departement {
+      id
+      nom
+    }
+  }
+}
+
+# Get a specific cours
+query {
+  cours(id: 1) {
+    id
+    code
+    intitule
+    description
+    credits
+    departement {
+      id
+      nom
+    }
+    professeur {
+      id
+      numeroEmploye
+    }
+  }
+}
+
+# Get all departements
+query {
+  departements {
+    id
+    nom
+    description
+  }
+}
+
+# Get a specific inscription
+query {
+  inscription(id: 1) {
+    id
+    dateInscription
+    statut
+    etudiant {
+      id
+      numeroEtudiant
+    }
+    cours {
+      id
+      code
+    }
+  }
+}
+
+# Get a specific note
+query {
+  note(id: 1) {
+    id
+    valeur
+    commentaire
+    inscription {
+      id
+      etudiant {
+        numeroEtudiant
+      }
+      cours {
+        code
+      }
+    }
+  }
+}

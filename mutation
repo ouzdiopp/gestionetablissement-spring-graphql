@@ -1,0 +1,93 @@
+# Create a new etudiant
+mutation {
+  createEtudiant(input: {
+    numeroEtudiant: "E12345"
+    dateNaissance: "2000-01-01"
+    filiere: "Informatique"
+    userId: 1051
+    departementId: 1
+  }) {
+    id
+    numeroEtudiant
+    filiere
+  }
+}
+
+# Update an existing etudiant
+mutation {
+  updateEtudiant(id: 1, input: {
+    numeroEtudiant: "E12345"
+    dateNaissance: "2000-01-01"
+    filiere: "Mathématiques"
+    userId: 1051
+    departementId: 2
+  }) {
+    id
+    numeroEtudiant
+    filiere
+  }
+}
+
+# Delete an etudiant
+mutation {
+  deleteEtudiant(id: 10)
+}
+
+# Create a new professeur
+mutation {
+  createProfesseur(input: {
+    numeroEmploye: "P12345"
+    dateEmbauche: "2023-01-01"
+    specialite: "Java"
+    bureau: "B101"
+    userId: 1050
+    departementId: 1
+  }) {
+    id
+    numeroEmploye
+    specialite
+  }
+}
+
+# Create a new cours
+mutation {
+  createCours(input: {
+    code: "INFO101"
+    intitule: "Introduction à la programmation"
+    description: "Cours de base en programmation"
+    credits: 5
+    departementId: 1
+    professeurId: 1
+  }) {
+    id
+    code
+    intitule
+  }
+}
+
+# Create a new inscription
+mutation {
+  createInscription(input: {
+    dateInscription: "2023-09-01"
+    statut: INSCRIT
+    etudiantId: 1
+    coursId: 1
+  }) {
+    id
+    dateInscription
+    statut
+  }
+}
+
+# Create a new note
+mutation {
+  createNote(input: {
+    valeur: 15.5
+    commentaire: "Bon travail"
+    inscriptionId: 1
+  }) {
+    id
+    valeur
+    commentaire
+  }
+}

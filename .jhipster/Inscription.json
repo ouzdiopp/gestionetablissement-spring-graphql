@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20240815121554"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "dateInscription",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "StatutInscription",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "INSCRIT,ABANDONNE,TERMINE"
+    }
+  ],
+  "name": "Inscription",
+  "relationships": [
+    {
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "inscription",
+      "relationshipName": "note",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "numeroEtudiant",
+      "otherEntityName": "etudiant",
+      "relationshipName": "etudiant",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "cours",
+      "relationshipName": "cours",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,68 @@
+entity Etudiant {
+  numeroEtudiant String required unique
+  dateNaissance LocalDate required
+  filiere String required
+}
+
+entity Professeur {
+  numeroEmploye String required unique
+  dateEmbauche LocalDate required
+  specialite String required
+  bureau String
+}
+
+entity Cours {
+  code String required unique
+  intitule String required
+  description TextBlob
+  credits Integer required min(1) max(30)
+}
+
+entity Departement {
+  nom String required unique
+  description TextBlob
+}
+
+entity Inscription {
+  dateInscription LocalDate required
+  statut StatutInscription required
+}
+
+entity Note {
+  valeur Float required min(0) max(20)
+  commentaire TextBlob
+}
+
+enum StatutInscription {
+  INSCRIT, ABANDONNE, TERMINE
+}
+
+relationship OneToOne {
+  Etudiant{user(login)} to User with builtInEntity
+  Professeur{user(login)} to User with builtInEntity
+}
+
+relationship ManyToOne {
+  Etudiant{departement(nom)} to Departement
+  Professeur{departement(nom)} to Departement
+  Cours{departement(nom)} to Departement
+  Cours{professeur(numeroEmploye)} to Professeur
+}
+
+relationship ManyToMany {
+  Etudiant{cours(code)} to Cours{etudiants(numeroEtudiant)}
+}
+
+relationship OneToMany {
+  Etudiant to Inscription{etudiant(numeroEtudiant)}
+  Cours to Inscription{cours(code)}
+  Inscription to Note{inscription}
+}
+
+paginate Etudiant, Professeur, Cours with pagination
+
+dto * with mapstruct
+
+service all with serviceImpl
+
+filter Etudiant, Professeur, Cours

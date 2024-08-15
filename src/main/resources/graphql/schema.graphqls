@@ -1,0 +1,154 @@
+type Query {
+    etudiant(id: ID!): Etudiant
+    etudiants(page: Int, size: Int): [Etudiant]!
+    professeur(id: ID!): Professeur
+    professeurs(page: Int, size: Int): [Professeur]!
+    cours(id: ID!): Cours
+    courss(page: Int, size: Int): [Cours]!
+    departement(id: ID!): Departement
+    departements: [Departement]!
+    inscription(id: ID!): Inscription
+    inscriptions: [Inscription]!
+    note(id: ID!): Note
+    notes: [Note]!
+}
+
+type Mutation {
+    createEtudiant(input: EtudiantInput!): Etudiant!
+    updateEtudiant(id: ID!, input: EtudiantInput!): Etudiant!
+    deleteEtudiant(id: ID!): Boolean!
+
+    createProfesseur(input: ProfesseurInput!): Professeur!
+    updateProfesseur(id: ID!, input: ProfesseurInput!): Professeur!
+    deleteProfesseur(id: ID!): Boolean!
+
+    createCours(input: CoursInput!): Cours!
+    updateCours(id: ID!, input: CoursInput!): Cours!
+    deleteCours(id: ID!): Boolean!
+
+    createDepartement(input: DepartementInput!): Departement!
+    updateDepartement(id: ID!, input: DepartementInput!): Departement!
+    deleteDepartement(id: ID!): Boolean!
+
+    createInscription(input: InscriptionInput!): Inscription!
+    updateInscription(id: ID!, input: InscriptionInput!): Inscription!
+    deleteInscription(id: ID!): Boolean!
+
+    createNote(input: NoteInput!): Note!
+    updateNote(id: ID!, input: NoteInput!): Note!
+    deleteNote(id: ID!): Boolean!
+}
+
+type Etudiant {
+    id: ID!
+    numeroEtudiant: String!
+    dateNaissance: String!
+    filiere: String!
+    user: User
+    departement: Departement
+    cours: [Cours]
+    inscriptions: [Inscription]
+}
+
+input EtudiantInput {
+    numeroEtudiant: String!
+    dateNaissance: String!
+    filiere: String!
+    userId: ID
+    departementId: ID
+}
+
+type Professeur {
+    id: ID!
+    numeroEmploye: String!
+    dateEmbauche: String!
+    specialite: String!
+    bureau: String
+    user: User
+    departement: Departement
+    cours: [Cours]
+}
+
+input ProfesseurInput {
+    numeroEmploye: String!
+    dateEmbauche: String!
+    specialite: String!
+    bureau: String
+    userId: ID
+    departementId: ID
+}
+
+type Cours {
+    id: ID!
+    code: String!
+    intitule: String!
+    description: String
+    credits: Int!
+    departement: Departement
+    professeur: Professeur
+    etudiants: [Etudiant]
+    inscriptions: [Inscription]
+}
+
+input CoursInput {
+    code: String!
+    intitule: String!
+    description: String
+    credits: Int!
+    departementId: ID!
+    professeurId: ID!
+}
+
+type Departement {
+    id: ID!
+    nom: String!
+    description: String
+    etudiants: [Etudiant]
+    professeurs: [Professeur]
+    cours: [Cours]
+}
+
+input DepartementInput {
+    nom: String!
+    description: String
+}
+
+type Inscription {
+    id: ID!
+    dateInscription: String!
+    statut: StatutInscription!
+    etudiant: Etudiant
+    cours: Cours
+    notes: [Note]
+}
+
+input InscriptionInput {
+    dateInscription: String!
+    statut: StatutInscription!
+    etudiantId: ID!
+    coursId: ID!
+}
+
+type Note {
+    id: ID!
+    valeur: Float!
+    commentaire: String
+    inscription: Inscription
+}
+
+input NoteInput {
+    valeur: Float!
+    commentaire: String
+    inscriptionId: ID!
+}
+
+type User {
+    id: ID!
+    login: String!
+}
+
+enum StatutInscription {
+    INSCRIT
+    ABANDONNE
+    TERMINE
+}
